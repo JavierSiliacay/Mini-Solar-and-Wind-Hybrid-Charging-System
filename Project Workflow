@@ -1,0 +1,53 @@
+Project Workflow
+
+System Power-Up
+The Arduino Nano is powered by energy supplied from the solar panel and wind turbine charging system through a regulated power source.
+
+Pin Initialization
+
+Two infrared sensors are configured as digital inputs.
+
+Four LEDs (red and green for each sensor) are configured as digital outputs.
+
+Serial communication is initialized for status monitoring.
+
+Continuous Sensor Reading
+The Arduino continuously reads the digital states of both infrared sensors inside the main loop.
+
+Dual Sensor Detection Check
+
+If both sensors detect motion simultaneously (LOW state), the system enters a high-alert mode.
+
+Both red LEDs blink rapidly to indicate a critical detection condition.
+
+Normal sensor processing is temporarily skipped during this alert state.
+
+Individual Sensor Evaluation
+If only one sensor detects motion:
+
+The corresponding red LED turns ON.
+
+The corresponding green LED turns OFF.
+
+The other sensor continues normal operation independently.
+
+Normal Monitoring State
+
+If no motion is detected, both green LEDs remain ON.
+
+Red LEDs remain OFF, indicating normal system status.
+
+Visual Feedback Output
+LED indicators provide immediate visual feedback for:
+
+Normal operation
+
+Single-sensor detection
+
+Dual-sensor high-alert condition
+
+Serial Monitoring
+When both sensors detect motion, an alert message is printed to the Serial Monitor for debugging and observation.
+
+Loop Repetition
+The system repeats the monitoring and decision process continuously with a short delay to ensure stable and responsive operation.
