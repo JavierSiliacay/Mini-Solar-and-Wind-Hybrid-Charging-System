@@ -1,0 +1,69 @@
+//Mini Solar Panel and Wind Turbine Charging for 18650 into Arduino Nano Project
+
+// Sensor Pins
+const int sen1 = 10;
+const int sen2 = 12;
+
+// Sensor 1 LEDs
+const int green1 = 9;
+const int red1 = 5;
+
+// Sensor 2 LEDs
+const int green2 = 11;
+const int red2 = 7;
+
+void setup() {
+  pinMode(sen1, INPUT);
+  pinMode(sen2, INPUT);
+
+  pinMode(green1, OUTPUT);
+  pinMode(red1, OUTPUT);
+
+  pinMode(green2, OUTPUT);
+  pinMode(red2, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  int sensor1 = digitalRead(sen1);
+  int sensor2 = digitalRead(sen2);
+
+  // ---- BOTH SENSORS DETECT ----
+  if (sensor1 == LOW && sensor2 == LOW) {
+    Serial.println("ALERT! BOTH SENSORS DETECT MOTION!");
+
+    // Blink both red LEDs fast
+    digitalWrite(red1, HIGH);
+    digitalWrite(red2, HIGH);
+    digitalWrite(green1, LOW);
+    digitalWrite(green2, LOW);
+    delay(100);
+
+    digitalWrite(red1, LOW);
+    digitalWrite(red2, LOW);
+    delay(100);
+
+    return; // Stop here; don't check normal behavior
+  }
+
+  // ---- SENSOR 1 NORMAL LOGIC ----
+  if (sensor1 == LOW) {
+    digitalWrite(red1, HIGH);
+    digitalWrite(green1, LOW);
+  } else {
+    digitalWrite(red1, LOW);
+    digitalWrite(green1, HIGH);
+  }
+
+  // ---- SENSOR 2 NORMAL LOGIC ----
+  if (sensor2 == LOW) {
+    digitalWrite(red2, HIGH);
+    digitalWrite(green2, LOW);
+  } else {
+    digitalWrite(red2, LOW);
+    digitalWrite(green2, HIGH);
+  }
+
+  delay(50);
+}
