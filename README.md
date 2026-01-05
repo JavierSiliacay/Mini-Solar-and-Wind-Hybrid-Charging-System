@@ -77,5 +77,3 @@ You are free to modify, improve, and expand the system.
 
 ---
 
-
-Just say the word.
